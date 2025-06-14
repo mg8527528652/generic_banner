@@ -1,0 +1,416 @@
+[
+    {
+      "filename": "Anatomical.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/b788589e-6b41-4442-a5c6-6d63ad20cde3_Anatomical.ttf",
+      "family_name": "Anatomical",
+      "style": "Regular",
+      "description": "A precise and structural display font with a technical, blueprint-like feel. Ideal for scientific posters or modern, minimalist branding.",
+      "typography": "Sans-serif, Display, Geometric, Monoline",
+      "themes": ["tech", "science", "modern", "minimalist", "architectural", "display"]
+    },
+    {
+      "filename": "Avapore.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/9831cb50-51a0-4869-aefd-14f0178d23e6_Avapore.ttf",
+      "family_name": "Avapore",
+      "style": "Regular",
+      "description": "A modern and sleek font with a futuristic, 'vaporwave' aesthetic. Its clean lines make it suitable for tech, fashion, and edgy branding.",
+      "typography": "Sans-serif, Display, Futuristic",
+      "themes": ["futuristic", "tech", "vaporwave", "modern", "fashion", "display"]
+    },
+    {
+      "filename": "Banget.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/e10d6541-9606-4a5f-89d6-f0b069759f18_Banget.ttf",
+      "family_name": "Banget",
+      "style": "Regular",
+      "description": "A casual, friendly, and slightly quirky handwritten font. Perfect for informal quotes, social media posts, and anything needing a personal touch.",
+      "typography": "Handwritten, Sans-serif, Casual",
+      "themes": ["casual", "friendly", "quirky", "handwritten", "social media", "kids"]
+    },
+    {
+      "filename": "Black.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/3d870faf-11f5-466f-869e-f17a4b4a22ac_Black.ttf",
+      "family_name": "Black",
+      "style": "Black",
+      "description": "A very heavy, impactful, and bold display font. Use it for powerful headlines, posters, and statements where you need maximum weight.",
+      "typography": "Sans-serif, Display, Extra-Bold",
+      "themes": ["bold", "heavy", "impact", "headline", "poster", "masculine", "sports"]
+    },
+    {
+      "filename": "Castio-Italic.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/fd374f88-e3ed-40b9-a6c8-359df3acc296_Castio-Italic.ttf",
+      "family_name": "Castio",
+      "style": "Italic",
+      "description": "A classic and elegant serif font with a modern touch. Its readability makes it great for editorial content, sophisticated branding, and formal invitations.",
+      "typography": "Serif, Classic, Elegant",
+      "themes": ["elegant", "classic", "serif", "editorial", "luxury", "wedding", "formal"]
+    },
+    {
+      "filename": "Castio-Regular.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/5b3ab777-3b48-42ba-b515-633bd6dcc47f_Castio-Regular.ttf",
+      "family_name": "Castio",
+      "style": "Regular",
+      "description": "A classic and elegant serif font with a modern touch. Its readability makes it great for editorial content, sophisticated branding, and formal invitations.",
+      "typography": "Serif, Classic, Elegant",
+      "themes": ["elegant", "classic", "serif", "editorial", "luxury", "wedding", "formal"]
+    },
+    {
+      "filename": "Charlotte.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/2b46c295-cc03-4d7c-93a6-75db7488812f_Charlotte.ttf",
+      "family_name": "Charlotte",
+      "style": "Regular",
+      "description": "A beautiful and personal signature-style script font. It's perfect for logos, name cards, wedding invitations, and adding an authentic, feminine touch.",
+      "typography": "Script, Signature, Handwritten",
+      "themes": ["signature", "feminine", "wedding", "logo", "elegant", "handwritten", "beauty"]
+    },
+    {
+      "filename": "cinema sunday.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/e6a079d5-f79e-4ea7-bb0b-96c0ad2b9f5a_cinema sunday.ttf",
+      "family_name": "Cinema Sunday",
+      "style": "Regular",
+      "description": "A nostalgic font that evokes the charm of vintage movie titles or retro diners. It has a casual, friendly, and slightly playful feel.",
+      "typography": "Sans-serif, Retro, Casual",
+      "themes": ["retro", "vintage", "cinema", "casual", "food", "nostalgia", "fun"]
+    },
+    {
+      "filename": "Cyrovoid.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/50667065-ed1b-44b9-8905-8bbf0f187e66_Cyrovoid.ttf",
+      "family_name": "Cyrovoid",
+      "style": "Regular",
+      "description": "A sharp, aggressive display font with a strong sci-fi or gaming aesthetic. Excellent for futuristic branding, tech logos, and movie posters.",
+      "typography": "Sans-serif, Display, Futuristic, Sharp",
+      "themes": ["tech", "futuristic", "sci-fi", "gaming", "modern", "display", "sharp"]
+    },
+    {
+      "filename": "DailyShine-Regular.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/563bef54-8439-40ce-8c10-74f99b05aee4_DailyShine-Regular.ttf",
+      "family_name": "DailyShine",
+      "style": "Regular",
+      "description": "A clean, optimistic, and highly readable handwritten font. It feels positive and is great for inspirational quotes, blogs, and uplifting branding.",
+      "typography": "Handwritten, Sans-serif, Clean",
+      "themes": ["inspirational", "positive", "clean", "friendly", "blog", "lifestyle", "handwritten"]
+    },
+    {
+      "filename": "DopeDisplay-Black.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/568f0048-73c0-4ab6-8521-06cac32e516b_DopeDisplay-Black.ttf",
+      "family_name": "DopeDisplay",
+      "style": "Black",
+      "description": "A modern, urban-inspired display font with a cool and confident vibe. Perfect for streetwear brands, music posters, and trendy social media graphics.",
+      "typography": "Sans-serif, Display, Urban",
+      "themes": ["urban", "streetwear", "modern", "cool", "music", "display", "bold"]
+    },
+    {
+      "filename": "DopeDisplay-Normal.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/8bc3097f-1ac1-40b1-b1e3-e5184480d3b7_DopeDisplay-Normal.ttf",
+      "family_name": "DopeDisplay",
+      "style": "Normal",
+      "description": "A modern, urban-inspired display font with a cool and confident vibe. Perfect for streetwear brands, music posters, and trendy social media graphics.",
+      "typography": "Sans-serif, Display, Urban",
+      "themes": ["urban", "streetwear", "modern", "cool", "music", "display", "bold"]
+    },
+    {
+      "filename": "Drakors-Regular.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/d4baad05-66d6-4f21-87c8-47e0113bf0df_Drakors-Regular.ttf",
+      "family_name": "Drakors",
+      "style": "Regular",
+      "description": "A powerful and dramatic display font, reminiscent of fantasy or epic movie titles. Its sharp serifs give it a strong and memorable character.",
+      "typography": "Serif, Display, High-contrast, Sharp",
+      "themes": ["fantasy", "epic", "movie", "gaming", "dramatic", "magic", "display"]
+    },
+    {
+      "filename": "East Kind.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/771068e8-101a-47a8-af8e-b3432b265420_East Kind.ttf",
+      "family_name": "East Kind",
+      "style": "Regular",
+      "description": "A gentle and kind-hearted handwritten font. Its rounded, soft forms make it perfect for children's books, eco-friendly branding, and heartfelt messages.",
+      "typography": "Handwritten, Rounded, Casual",
+      "themes": ["gentle", "kids", "eco", "friendly", "organic", "handwritten", "soft"]
+    },
+    {
+      "filename": "FinoraDisplay-Italic.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/0b6dbcff-435f-4489-8195-6cad10c1a169_FinoraDisplay-Italic.ttf",
+      "family_name": "FinoraDisplay",
+      "style": "Italic",
+      "description": "A high-fashion, elegant display font with beautiful high-contrast letterforms. The perfect choice for luxury branding, magazine headlines, and high-end logos.",
+      "typography": "Serif, Display, High-contrast, Elegant",
+      "themes": ["fashion", "luxury", "elegant", "magazine", "branding", "beauty", "display"]
+    },
+    {
+      "filename": "FinoraDisplay-Regular.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/f22ad8ed-8c0b-461a-97fc-ccc86b47ce04_FinoraDisplay-Regular.ttf",
+      "family_name": "FinoraDisplay",
+      "style": "Regular",
+      "description": "A high-fashion, elegant display font with beautiful high-contrast letterforms. The perfect choice for luxury branding, magazine headlines, and high-end logos.",
+      "typography": "Serif, Display, High-contrast, Elegant",
+      "themes": ["fashion", "luxury", "elegant", "magazine", "branding", "beauty", "display"]
+    },
+    {
+      "filename": "Gendy.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/b1c64957-3c9c-42c0-bcba-ba98628a5ec5_Gendy.ttf",
+      "family_name": "Gendy",
+      "style": "Regular",
+      "description": "A stylish and modern font that balances elegance with a friendly appeal. Suitable for a wide range of applications from lifestyle blogs to cafe branding.",
+      "typography": "Sans-serif, Humanist",
+      "themes": ["stylish", "modern", "friendly", "lifestyle", "branding", "cafe"]
+    },
+    {
+      "filename": "Ginger.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/a07a5608-8342-4d0e-91a4-1a51abc2f1d7_Ginger.ttf",
+      "family_name": "Ginger",
+      "style": "Regular",
+      "description": "A playful and bubbly script font. Its rounded and bouncy style is great for product packaging, logos, and designs that need a splash of fun.",
+      "typography": "Script, Rounded, Bouncy",
+      "themes": ["playful", "fun", "bouncy", "kids", "food", "packaging", "logo"]
+    },
+    {
+      "filename": "Goodly-Bold.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/2c56de37-3967-4523-a7e7-c81828fbb6ea_Goodly-Bold.ttf",
+      "family_name": "Goodly",
+      "style": "Bold",
+      "description": "A versatile and clean geometric sans-serif font family. Its wide range of weights makes it a workhorse for UI/UX, corporate branding, and editorial layouts.",
+      "typography": "Sans-serif, Geometric, Workhorse",
+      "themes": ["clean", "minimalist", "corporate", "versatile", "ui/ux", "modern", "geometric"]
+    },
+    {
+      "filename": "Goodly-ExtraLight.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/d79a9151-2646-4a96-a97d-591c8bf3242b_Goodly-ExtraLight.ttf",
+      "family_name": "Goodly",
+      "style": "ExtraLight",
+      "description": "A versatile and clean geometric sans-serif font family. Its wide range of weights makes it a workhorse for UI/UX, corporate branding, and editorial layouts.",
+      "typography": "Sans-serif, Geometric, Workhorse",
+      "themes": ["clean", "minimalist", "corporate", "versatile", "ui/ux", "modern", "geometric"]
+    },
+    {
+      "filename": "Goodly-Light.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/92130580-636f-4c09-ab6a-01790ab502b4_Goodly-Light.ttf",
+      "family_name": "Goodly",
+      "style": "Light",
+      "description": "A versatile and clean geometric sans-serif font family. Its wide range of weights makes it a workhorse for UI/UX, corporate branding, and editorial layouts.",
+      "typography": "Sans-serif, Geometric, Workhorse",
+      "themes": ["clean", "minimalist", "corporate", "versatile", "ui/ux", "modern", "geometric"]
+    },
+    {
+      "filename": "Goodly-Medium.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/9f884d9b-ccf3-453d-bc67-f521ed7b9603_Goodly-Medium.ttf",
+      "family_name": "Goodly",
+      "style": "Medium",
+      "description": "A versatile and clean geometric sans-serif font family. Its wide range of weights makes it a workhorse for UI/UX, corporate branding, and editorial layouts.",
+      "typography": "Sans-serif, Geometric, Workhorse",
+      "themes": ["clean", "minimalist", "corporate", "versatile", "ui/ux", "modern", "geometric"]
+    },
+    {
+      "filename": "Goodly-Regular.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/83a6462f-6869-4121-a883-098b64b2dc81_Goodly-Regular.ttf",
+      "family_name": "Goodly",
+      "style": "Regular",
+      "description": "A versatile and clean geometric sans-serif font family. Its wide range of weights makes it a workhorse for UI/UX, corporate branding, and editorial layouts.",
+      "typography": "Sans-serif, Geometric, Workhorse",
+      "themes": ["clean", "minimalist", "corporate", "versatile", "ui/ux", "modern", "geometric"]
+    },
+    {
+      "filename": "Goodly-Semibold.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/50489cdb-9436-47b1-8210-2d460ac5b479_Goodly-Semibold.ttf",
+      "family_name": "Goodly",
+      "style": "Semibold",
+      "description": "A versatile and clean geometric sans-serif font family. Its wide range of weights makes it a workhorse for UI/UX, corporate branding, and editorial layouts.",
+      "typography": "Sans-serif, Geometric, Workhorse",
+      "themes": ["clean", "minimalist", "corporate", "versatile", "ui/ux", "modern", "geometric"]
+    },
+    {
+      "filename": "Gunterz-Black.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/811118b9-17ed-4d73-b817-d5b6966c9eb3_Gunterz-Black.ttf",
+      "family_name": "Gunterz",
+      "style": "Black",
+      "description": "A strong and impactful sans-serif family with a confident, industrial feel. Excellent for headlines, logos, and branding that needs to feel bold and modern.",
+      "typography": "Sans-serif, Display, Geometric, High-impact",
+      "themes": ["bold", "modern", "masculine", "sports", "automotive", "tech", "display"]
+    },
+    {
+      "filename": "Gunterz-BlackItalic.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/c1b68dee-3c07-416c-89c6-ceb439476336_Gunterz-BlackItalic.ttf",
+      "family_name": "Gunterz",
+      "style": "Black Italic",
+      "description": "A strong and impactful sans-serif family with a confident, industrial feel. Excellent for headlines, logos, and branding that needs to feel bold and modern.",
+      "typography": "Sans-serif, Display, Geometric, High-impact",
+      "themes": ["bold", "modern", "masculine", "sports", "automotive", "tech", "display"]
+    },
+    {
+      "filename": "Gunterz-Bold.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/ae9052c3-44c5-41dd-afd7-68f5392f3f5b_Gunterz-Bold.ttf",
+      "family_name": "Gunterz",
+      "style": "Bold",
+      "description": "A strong and impactful sans-serif family with a confident, industrial feel. Excellent for headlines, logos, and branding that needs to feel bold and modern.",
+      "typography": "Sans-serif, Display, Geometric, High-impact",
+      "themes": ["bold", "modern", "masculine", "sports", "automotive", "tech", "display"]
+    },
+    {
+      "filename": "Gunterz-BoldItalic.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/cd8a1383-1c8a-49c3-adc2-281023427597_Gunterz-BoldItalic.ttf",
+      "family_name": "Gunterz",
+      "style": "Bold Italic",
+      "description": "A strong and impactful sans-serif family with a confident, industrial feel. Excellent for headlines, logos, and branding that needs to feel bold and modern.",
+      "typography": "Sans-serif, Display, Geometric, High-impact",
+      "themes": ["bold", "modern", "masculine", "sports", "automotive", "tech", "display"]
+    },
+    {
+      "filename": "Gunterz-Italic.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/eee6c8a0-6baf-4cdc-bc06-f714a1b9c85f_Gunterz-Italic.ttf",
+      "family_name": "Gunterz",
+      "style": "Italic",
+      "description": "A strong and impactful sans-serif family with a confident, industrial feel. Excellent for headlines, logos, and branding that needs to feel bold and modern.",
+      "typography": "Sans-serif, Display, Geometric, High-impact",
+      "themes": ["bold", "modern", "masculine", "sports", "automotive", "tech", "display"]
+    },
+    {
+      "filename": "Gunterz-Medium.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/d434be2a-6272-4358-8f86-6e9aa642f453_Gunterz-Medium.ttf",
+      "family_name": "Gunterz",
+      "style": "Medium",
+      "description": "A strong and impactful sans-serif family with a confident, industrial feel. Excellent for headlines, logos, and branding that needs to feel bold and modern.",
+      "typography": "Sans-serif, Display, Geometric, High-impact",
+      "themes": ["bold", "modern", "masculine", "sports", "automotive", "tech", "display"]
+    },
+    {
+      "filename": "Gunterz-MediumItalic.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/56ba338b-c494-4ed4-9462-ee37ee5c76aa_Gunterz-MediumItalic.ttf",
+      "family_name": "Gunterz",
+      "style": "Medium Italic",
+      "description": "A strong and impactful sans-serif family with a confident, industrial feel. Excellent for headlines, logos, and branding that needs to feel bold and modern.",
+      "typography": "Sans-serif, Display, Geometric, High-impact",
+      "themes": ["bold", "modern", "masculine", "sports", "automotive", "tech", "display"]
+    },
+    {
+      "filename": "Gunterz-Regular.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/04917344-f61d-497f-a402-33d6d495cbc7_Gunterz-Regular.ttf",
+      "family_name": "Gunterz",
+      "style": "Regular",
+      "description": "A strong and impactful sans-serif family with a confident, industrial feel. Excellent for headlines, logos, and branding that needs to feel bold and modern.",
+      "typography": "Sans-serif, Display, Geometric, High-impact",
+      "themes": ["bold", "modern", "masculine", "sports", "automotive", "tech", "display"]
+    },
+    {
+      "filename": "Kind Avenue_ttf.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/20b05ba3-b3cb-4573-8aeb-b35a7902b072_Kind Avenue_ttf.ttf",
+      "family_name": "Kind Avenue",
+      "style": "Regular",
+      "description": "A friendly, upright script font with a warm and inviting personality. It's like a note from a good friend, making it perfect for approachable branding and quotes.",
+      "typography": "Script, Handwritten, Casual, Upright",
+      "themes": ["friendly", "inviting", "casual", "handwritten", "approachable", "branding"]
+    },
+    {
+      "filename": "Kindly Track.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/5666e596-493a-4a7e-a0c5-c86fdec3c8b8_Kindly Track.ttf",
+      "family_name": "Kindly Track",
+      "style": "Regular",
+      "description": "A clean and legible handwritten font that maintains a personal feel without sacrificing clarity. Great for longer-form text that needs a human touch.",
+      "typography": "Handwritten, Sans-serif, Legible",
+      "themes": ["legible", "handwritten", "personal", "clean", "friendly", "notes"]
+    },
+    {
+      "filename": "Klasico Blur.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/591093a4-d04a-4b1c-9ffd-f912ed03f08b_Klasico Blur.ttf",
+      "family_name": "Klasico",
+      "style": "Blur",
+      "description": "A modern take on a classic serif. The 'Blur' version adds a unique, atmospheric, and dreamy effect for special display purposes.",
+      "typography": "Serif, Classic, Modern, Special Effect",
+      "themes": ["classic", "modern", "serif", "editorial", "timeless", "atmospheric", "dreamy"]
+    },
+    {
+      "filename": "Klasico Italic.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/7fd516e4-727e-4a1e-a44f-36643e711f26_Klasico Italic.ttf",
+      "family_name": "Klasico",
+      "style": "Italic",
+      "description": "A modern take on a classic serif, this family offers versatility with clean lines and a timeless feel for editorial and branding.",
+      "typography": "Serif, Classic, Modern",
+      "themes": ["classic", "modern", "serif", "editorial", "timeless", "versatile", "elegant"]
+    },
+    {
+      "filename": "Klasico Light Italic.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/d00f7aab-cc1e-42b1-b397-e88fa6dc9636_Klasico Light Italic.ttf",
+      "family_name": "Klasico",
+      "style": "Light Italic",
+      "description": "A modern take on a classic serif, this family offers versatility with clean lines and a timeless feel for editorial and branding.",
+      "typography": "Serif, Classic, Modern",
+      "themes": ["classic", "modern", "serif", "editorial", "timeless", "versatile", "elegant"]
+    },
+    {
+      "filename": "Klasico Light.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/ea6a5491-726e-40f8-a991-b6acf601ab4a_Klasico Light.ttf",
+      "family_name": "Klasico",
+      "style": "Light",
+      "description": "A modern take on a classic serif, this family offers versatility with clean lines and a timeless feel for editorial and branding.",
+      "typography": "Serif, Classic, Modern",
+      "themes": ["classic", "modern", "serif", "editorial", "timeless", "versatile", "elegant"]
+    },
+    {
+      "filename": "Klasico.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/d0853921-dee3-4aa7-baee-0ac5bf673c3f_Klasico.ttf",
+      "family_name": "Klasico",
+      "style": "Regular",
+      "description": "A modern take on a classic serif, this family offers versatility with clean lines and a timeless feel for editorial and branding.",
+      "typography": "Serif, Classic, Modern",
+      "themes": ["classic", "modern", "serif", "editorial", "timeless", "versatile", "elegant"]
+    },
+    {
+      "filename": "Malibu Sunday Script.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/9226a134-842f-4f90-8b95-938b218ea8a0_Malibu Sunday Script.ttf",
+      "family_name": "Malibu Sunday",
+      "style": "Script",
+      "description": "A font duo with a relaxed, sun-soaked vibe. The script is casual and flowing, perfect for lifestyle brands and social media.",
+      "typography": "Font Duo (Script), Casual, Handwritten",
+      "themes": ["summer", "beach", "casual", "handwritten", "script", "lifestyle", "social media"]
+    },
+    {
+      "filename": "Malibu Sunday Serif.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/c6647186-a747-45b3-a1a2-524acc0bd846_Malibu Sunday Serif.ttf",
+      "family_name": "Malibu Sunday",
+      "style": "Serif",
+      "description": "A font duo with a relaxed, sun-soaked vibe. The friendly serif is stylish and serves as a great companion to the script.",
+      "typography": "Font Duo (Serif), Casual, Low-contrast",
+      "themes": ["summer", "beach", "casual", "friendly", "retro", "lifestyle", "branding"]
+    },
+    {
+      "filename": "RawPixel-BoldItalic.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/a2ac1614-6f4a-4ee1-ba0d-ef2b821721f0_RawPixel-BoldItalic.ttf",
+      "family_name": "RawPixel",
+      "style": "Bold Italic",
+      "description": "A functional and modern sans-serif designed for clarity and a neutral tone, likely optimized for digital use by the creative resource site RawPixel.",
+      "typography": "Sans-serif, Humanist, Neutral",
+      "themes": ["neutral", "modern", "clarity", "digital", "corporate", "clean", "ui/ux"]
+    },
+    {
+      "filename": "RawPixel-Italic.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/72674208-2d72-46d4-9c86-046009b098f9_RawPixel-Italic.ttf",
+      "family_name": "RawPixel",
+      "style": "Italic",
+      "description": "A functional and modern sans-serif designed for clarity and a neutral tone, likely optimized for digital use by the creative resource site RawPixel.",
+      "typography": "Sans-serif, Humanist, Neutral",
+      "themes": ["neutral", "modern", "clarity", "digital", "corporate", "clean", "ui/ux"]
+    },
+    {
+      "filename": "Shedry-Medium.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/4b31f180-f9fb-4cec-bf52-1e8e61ede7d8_Shedry-Medium.ttf",
+      "family_name": "Shedry",
+      "style": "Medium",
+      "description": "A modern and chic serif font with a sophisticated and gentle character. Its stylish forms are well-suited for high-end branding, blogs, and magazines.",
+      "typography": "Serif, Modern, Chic",
+      "themes": ["chic", "modern", "sophisticated", "branding", "blog", "magazine", "elegant"]
+    },
+    {
+      "filename": "Soft Quota TTF.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/970e2658-3d64-4982-8c5f-ba088a9cbc39_Soft Quota TTF.ttf",
+      "family_name": "Soft Quota",
+      "style": "Regular",
+      "description": "A very soft, rounded, and friendly sans-serif. Its lack of sharp corners gives it a gentle and approachable look, perfect for kids' brands or apps.",
+      "typography": "Sans-serif, Rounded, Soft",
+      "themes": ["soft", "rounded", "friendly", "kids", "approachable", "app", "cute"]
+    },
+    {
+      "filename": "SOFUNKY.ttf",
+      "url": "https://s3.us-east-2.wasabisys.com/ai-image-editor-webapp/fonts/font/ca07eca6-4bba-4281-8f43-eb62d2074dd5_SOFUNKY.ttf",
+      "family_name": "SOFUNKY",
+      "style": "Regular",
+      "description": "A groovy, retro display font that screams 1970s disco. It's bold, fun, and full of personality, ideal for themed parties, posters, and anything that needs a funky vibe.",
+      "typography": "Display, Retro, Funky, Heavy",
+      "themes": ["funky", "retro", "70s", "disco", "groovy", "party", "bold", "fun"]
+    }
+  ]

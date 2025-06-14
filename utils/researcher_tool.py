@@ -139,9 +139,11 @@ Your design plan must include:
 - If certain elements were not present in the input images, generate appropriate replacements based on best design principles.
 - Never leave placeholders. Always generate full text and visuals.
 
-Your output will directly power an AI image generation model — it must be complete, exact, and fully described.
+Your output banner description  will directly power an Agentic  AI pipeline which will generate the banner — it must be complete, exact, and fully described.
 
 Do not output any examples. Directly generate the full design specification.
+
+Output only banner description and no other text
 """
 
 
@@ -170,7 +172,7 @@ Do not output any examples. Directly generate the full design specification.
     try:
         message = HumanMessage(content=content_parts)
         response = analysis_llm.invoke([message])
-        print(response.content)
+        # print(response.content)
         return response.content
     except Exception as e:
         return f"Error: The analysis call to the LLM failed. Details: {e}"
@@ -225,7 +227,11 @@ def banner_design_researcher(user_request: str) -> str:
     """
     try:
         IMAGE_CACHE.clear()
-        
+        tavily_search_tool = TavilySearch(api_key=TAVILY_API_KEY, max_results=15, include_images=True, search_depth="basic", include_domains=["https://www.canva.com/banners/templates", "https://www.freepik.com/", "https://in.pinterest.com/"])
+        agent_llm = ChatOpenAI(model="gpt-4o", openai_api_key=OPENAI_API_KEY, temperature=0.2)
+        all_tools = [tavily_search_tool, save_image_to_cache, analyze_images_from_cache]
+        agent = create_react_agent(agent_llm, all_tools)
+
         messages = [
             {"role": "system", "content": system_message},
             {"role": "user", "content": user_request}
@@ -247,11 +253,11 @@ def banner_design_researcher(user_request: str) -> str:
 
 if __name__ == "__main__":
     user_request = (
-        "create an awareness banner that motivates people to go to gym. create a 1080x1080 banner"
+        "create an awareness banner that motivates people to become  instagram influencers. create a 1080x1080 banner.  it would be good if background is an image of a rich woman counting money and sipping wine"
     )
     
-    creative_brief = banner_design_researcher(user_request)
+    creative_brief = banner_design_researcher.invoke({"user_request": user_request})
     
     print("\n--- Final Creative Brief (JSON) ---")
-    # Try to pretty-print if it's a valid JSON string
+
     print(creative_brief)
