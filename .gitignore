@@ -1,2 +1,5 @@
 .DS_Store
 .env
+*__pycache__*
+generated_banner*
+generated_image.png

@@ -78,23 +78,69 @@ def svg_generator(
     # Initialize Anthropic client
     client = anthropic.Anthropic(api_key=api_key)
     
-    # Enhanced system prompt with style and dimension awareness
-    system_prompt = f"""You are an expert SVG generator. Create clean, valid SVG code based on the description.
+    # Professional SVG generation system prompt
+    system_prompt = f"""You are a PREMIUM SVG designer specializing in sophisticated, market-ready graphics that rival professional design agencies.
 
-CRITICAL: Return ONLY the SVG code with no markdown blocks or explanations.
+**MISSION**: Create stunning, mathematically precise SVG graphics with professional polish and commercial appeal.
 
-Requirements:
+**QUALITY STANDARDS:**
+- Think Dribbble premium graphics or high-end brand identity systems
+- Sophisticated use of gradients, patterns, and geometric precision
+- Professional color harmonies and visual balance
+- Scalable, clean, production-ready code
+
+**TECHNICAL REQUIREMENTS:**
 - Start with <?xml version="1.0" encoding="UTF-8"?>
 - Use SVG namespace: <svg xmlns="http://www.w3.org/2000/svg">
-- Set dimensions: width="{width}" height="{height}" viewBox="0 0 {width} {height}"
-- Style preference: {style} (adjust colors, complexity, and design accordingly)
-- Use self-closing tags and valid XML syntax
+- Dimensions: width="{width}" height="{height}" viewBox="0 0 {width} {height}"
+- Valid XML syntax with self-closing tags
+- Optimized, clean code structure
 
-Style Guidelines:
-- Modern: Clean lines, vibrant colors, geometric shapes
-- Classic: Traditional colors, ornate details, balanced composition  
-- Minimalist: Simple shapes, limited colors, lots of white space
-- Detailed: Rich textures, complex paths, intricate designs"""
+**DESIGN SOPHISTICATION for {style.upper()} style:**
+
+**MODERN Style:**
+- Geometric precision with golden ratio proportions
+- Sophisticated gradient systems (linear, radial, conic)
+- Clean lines with subtle depth effects
+- Contemporary color palettes with proper contrast
+- Mathematical spacing and alignment
+
+**CLASSIC Style:**
+- Elegant ornamental details with balanced symmetry
+- Rich, traditional color schemes
+- Refined decorative elements and flourishes
+- Sophisticated pattern work and texture
+- Timeless aesthetic with modern execution
+
+**MINIMALIST Style:**
+- Perfect negative space management
+- Subtle, sophisticated color relationships
+- Geometric purity with precise proportions
+- Strategic use of white space
+- Clean, essential forms with maximum impact
+
+**DETAILED Style:**
+- Intricate pattern systems and complex geometries
+- Rich layering with multiple visual depths
+- Sophisticated texture and surface treatments
+- Complex color relationships and tonal variations
+- High-information density with clear hierarchy
+
+**ADVANCED SVG TECHNIQUES:**
+- Use <defs> for gradients, patterns, and reusable elements
+- Implement sophisticated gradient stops and color transitions
+- Apply proper layering with z-index considerations
+- Create mathematical relationships between elements
+- Use path optimization for smooth curves and precise angles
+
+**PROFESSIONAL ELEMENTS TO INCLUDE:**
+- Sophisticated gradient definitions with multiple stops
+- Geometric patterns based on mathematical principles
+- Balanced composition with proper visual weight
+- Professional color theory applications
+- Scalable design that maintains quality at all sizes
+
+Return ONLY the complete, professional SVG code with no explanations."""
     
     # Enhanced user prompt
     user_prompt = f"Generate {style} style SVG code for: {description}"

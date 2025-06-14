@@ -84,9 +84,10 @@ def analyze_images_from_cache(image_urls: list[str], user_query: str, resolution
     print(f"--- Tool Call: Analyzing {len(image_urls)} images from cache ---")
 
     analysis_llm = ChatOpenAI(
-        model="gpt-4o",
+        model="gpt-4.1-2025-04-14",
         openai_api_key=os.getenv("OPENAI_API_KEY"),
-        temperature=0.4
+        reasoning_effort="high",
+        temperature=0.3  # Lower temperature for more consistent, professional briefs
     )
 
     # Build the resolution context
@@ -95,55 +96,99 @@ def analyze_images_from_cache(image_urls: list[str], user_query: str, resolution
 
     # Build the analysis instruction
     analysis_prompt_text = """
-You are an expert banner design director for an AI generative system. Your job is to analyze the reference images and propose an exact, fully specified banner design plan that can be executed directly without further human input.
+You are a PREMIUM banner design director for a high-end AI design system. Your mission is to create SELLABLE, PROFESSIONAL-GRADE design briefs that rival top-tier design agencies like Pentagram, IDEO, or Sagmeister & Walsh.
 
-Your output is NOT a vague design description. You must generate a concrete layout plan with complete specifications for every part of the banner. Assume that you are responsible for completely generating the banner from scratch, even if certain assets like logos or icons are not provided.
+**QUALITY STANDARDS:**
+- Think Dribbble "Popular" section or Behance "Featured Projects"
+- Modern, sophisticated, market-ready designs worth $500-2000+
+- Rich visual depth with professional polish
+- Strong brand impact and commercial appeal
 
-Your design plan must include:
+**DESIGN ANALYSIS FRAMEWORK:**
+Analyze the reference images through these professional lenses:
+- **Visual Hierarchy**: How do the best designs guide the eye?
+- **Color Psychology**: What emotions and associations do colors create?
+- **Typography Systems**: How do premium designs handle font relationships?
+- **Composition Techniques**: Golden ratio, rule of thirds, visual balance
+- **Market Positioning**: Premium, mainstream, or budget aesthetic?
 
-1. **Banner Text Content:** 
-    - EXACT text to write in every section (main headline, subheadline, date, time, call-to-action, footer, etc).
-    - Do not say "insert date here" or "insert logo" unless logo has been provided. If no logo is available, create a design that does not depend on a logo.
+**COMPREHENSIVE DESIGN BRIEF STRUCTURE:**
 
-2. **Layout Structure:**
-    - The exact placement of each text block, image, or graphic element.
-    - Mention alignment (left, center, right), spacing, and approximate size proportions.
+1. **Brand Strategy & Message:**
+   - Primary message and emotional tone
+   - Target audience psychographics
+   - Brand personality (sophisticated, playful, trustworthy, innovative)
+   - Market positioning (premium, accessible luxury, mainstream)
 
-3. **Illustrations & Icons:**
-    - Exactly what illustrations, icons, or decorative elements should be included.
-    - Describe their style (e.g. flat, outline, cartoon, 3D, silhouette, vector), subject (e.g. balloons, stars, children, abstract waves), quantity, and positioning.
+2. **Typography System (PREMIUM FOCUS):**
+   - **Headline**: Exact font style, dramatic sizing (8-12% of canvas height)
+   - **Subheadline**: Complementary font, 60-70% of headline size
+   - **Body Text**: Clean, readable, 40-50% of headline
+   - **Accent Text**: Special elements, 70-80% of headline
+   - **Typography Mood**: Modern geometric, classic serif, artistic script, etc.
+   - **Letter spacing, line height, text effects specifications**
 
-4. **Background Composition:**
-    - The full background design: base color, gradients, patterns, textures, overlays, lighting effects.
-    - If using gradients, describe start/end colors and direction.
-    - Mention any decorative background elements (shapes, waves, sparkles, confetti, abstract patterns, etc.).
+3. **Professional Color Strategy:**
+   - **Primary Colors**: 2-3 dominant colors with hex codes
+   - **Secondary Palette**: 2-3 supporting colors
+   - **Accent Colors**: 1-2 high-impact colors for CTAs/highlights
+   - **Color Psychology**: Emotional impact and brand association
+   - **Contrast Ratios**: Ensure accessibility and readability
+   - **Gradient Specifications**: Advanced color transitions if needed
 
-5. **Typography:**
-    - The exact font style for each text type (headline, subheadline, body, footer).
-    - Specify font families or styles (e.g. bold sans-serif, handwritten script, geometric rounded sans-serif).
-    - Define approximate font sizes, weights, and colors.
+4. **Sophisticated Layout Architecture:**
+   - **Grid System**: How elements align and relate mathematically
+   - **Visual Weight Distribution**: Balanced asymmetry or centered symmetry
+   - **Focal Point Strategy**: Primary, secondary, tertiary attention areas  
+   - **White Space Management**: Strategic negative space for premium feel
+   - **Element Positioning**: Exact placement with mathematical precision
+   - **Margins and Padding**: Consistent spacing relationships
 
-6. **Color Palette:**
-    - List all colors used across the design.
-    - Use descriptive names (e.g. bright sky blue, vibrant coral red, pure white, golden yellow).
+5. **Advanced Visual Elements:**
+   - **Background Concept**: Atmospheric, textural, gradient, or photographic
+   - **Graphic Elements**: Icons, illustrations, decorative patterns
+   - **Visual Style**: Minimalist, maximalist, flat, dimensional, textural
+   - **Artistic Treatment**: Photography style, illustration approach, abstraction level
+   - **Depth and Dimension**: Shadows, overlays, layering, 3D effects
 
-7. **Visual Effects:**
-    - Describe any shadows, glows, outlines, or depth effects applied to text or graphics.
+6. **Professional Effects & Finishing:**
+   - **Lighting Concept**: Dramatic shadows, soft glows, directional lighting
+   - **Texture Application**: Paper, fabric, metal, glass effects
+   - **Blend Modes**: Multiply, screen, overlay applications
+   - **Filter Effects**: Blur, sharp, color adjustments
+   - **Visual Hierarchy Effects**: Size, color, contrast, positioning
 
-8. **Resolution-Awareness:**
-    - Always adapt proportions and composition based on the given resolution.
+7. **Market-Ready Specifications:**
+   - **Resolution Optimization**: Pixel-perfect scaling strategies
+   - **Asset Integration**: How multiple elements work together cohesively
+   - **Brand Consistency**: Maintainable visual standards
+   - **Conversion Focus**: Elements that drive action/engagement
+   - **Platform Adaptability**: Cross-platform visual effectiveness
 
-**Tone Rules:**
-- Be extremely explicit. Avoid phrases like "could have", "may include", "consider adding".
-- Always write as if you are finalizing the production-ready design blueprint.
-- If certain elements were not present in the input images, generate appropriate replacements based on best design principles.
-- Never leave placeholders. Always generate full text and visuals.
+8. **Alignment with User Query:**
+   - **Exact Match**: Align design elements directly with user query
+   - **Contextual Fit**: Ensure design elements support user intent
+   - **Brand Alignment**: Maintain consistent brand identity, if provided
+   - **Market Fit**: Ensure design resonates with target audience
 
-Your output banner description  will directly power an Agentic  AI pipeline which will generate the banner — it must be complete, exact, and fully described.
+**EXECUTION MANDATES:**
+- Generate EXACT text content (no placeholders like "insert here")
+- Specify mathematical relationships (1.618 golden ratio, 40px margins, etc.)
+- Define precise color values and combinations
+- Detail sophisticated visual effects and treatments
+- Create production-ready specifications for premium execution
 
-Do not output any examples. Directly generate the full design specification.
+**PREMIUM QUALITY MARKERS:**
+✓ Sophisticated color harmonies with professional contrast
+✓ Typography that creates emotional resonance
+✓ Composition that guides attention strategically  
+✓ Visual effects that add depth without clutter
+✓ Brand impact that commands premium pricing
+✓ Technical specifications for flawless execution
 
-Output only banner description and no other text
+Your design brief will power a premium AI pipeline - make it extraordinary, specific, and commercially valuable.
+
+Output ONLY the complete design specification in the format above.
 """
 
 
@@ -192,9 +237,8 @@ agent = create_react_agent(agent_llm, all_tools)
 
 system_message = (
     """You are a methodical design research agent. Your purpose is to gather visual intelligence and synthesize it into a structured design brief. You operate with a clear, stateful, three-phase process.
-
     **Phase 1: SEARCH**
-    1.  Your first action is ALWAYS to use the `tavily_search` tool to find image URLs relevant to the user's request.
+    1.  Your first action is ALWAYS to use the `tavily_search` tool to find image URLs relevant to the user's request. Draft search queries based on the user request and the product url and logo url if provided, to extract relevant layout banners.
     2.  Your goal is to gather an inventory of at least 8 high-quality, distinct image URLs.
     3.  To achieve this, you may need to call `tavily_search` multiple times with refined search queries. For example, if the user asks for "cricket banner," you can search for "cricket tournament poster," "modern cricket graphics," etc., to find varied examples.
     4.  Once you have compiled a list of at least 8 URLs in your thoughts, you will transition to the next phase.
@@ -221,9 +265,18 @@ system_message = (
 # --- Step 6: Define the main execution function with streaming ---
 
 @tool
-def banner_design_researcher(user_request: str) -> str:
+def banner_design_researcher(user_request: str, resolution: list[int], product_url_provided: bool = False, logo_url_provided : bool = False) -> str:
     """
     Researches and analyzes banner designs to create a detailed design brief.
+
+    Args:
+        user_request: The original user request.
+        resolution: The desired banner resolution as (width, height).
+        product_url_provided: Whether a product URL was provided.
+        logo_url_provided: Whether a logo URL was provided.
+
+    Returns:
+        A detailed design brief as a string.
     """
     try:
         IMAGE_CACHE.clear()
@@ -231,19 +284,26 @@ def banner_design_researcher(user_request: str) -> str:
         agent_llm = ChatOpenAI(model="gpt-4o", openai_api_key=OPENAI_API_KEY, temperature=0.2)
         all_tools = [tavily_search_tool, save_image_to_cache, analyze_images_from_cache]
         agent = create_react_agent(agent_llm, all_tools)
-
+        # combine user request with product url and logo url if provided
+        user_content = user_request
+        if product_url_provided:
+            user_content += f"\nProduct URL: {product_url_provided}"
+        if logo_url_provided:
+            user_content += f"\nLogo URL: {logo_url_provided}"
+        if resolution:
+            user_content += f"\nResolution: {str(resolution[0])}x{str(resolution[1])}"
         messages = [
             {"role": "system", "content": system_message},
-            {"role": "user", "content": user_request}
+            {"role": "user", "content": user_content}
         ]
         
         # MODIFICATION: Reverted to invoke() for direct execution
         result = agent.invoke({"messages": messages}, {"recursion_limit": 35})
-        
         # Extract the final response from the result dictionary
         if result and "messages" in result:
             last_message = result["messages"][-1]
             if hasattr(last_message, 'content'):
+                print(last_message.content)
                 return last_message.content
         
         return "Error: Could not generate design brief"

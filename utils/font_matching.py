@@ -47,16 +47,45 @@ def select_best_font_url(banner_prompt: str, json_path: str = "data/fonts_data.j
         font_copy.pop('url', None)
         fonts_for_api.append(font_copy)
 
-    # 3. Construct the system prompt for the Gemini model
+    # 3. Construct the enhanced system prompt for premium font selection
     system_prompt = f"""
-    You are a professional typography expert. Your task is to select the single best font filename from the provided JSON list to match the user's banner description.
-    Analyze the banner's theme, typography requirements, and overall mood.
-    Review the list of available fonts, paying close attention to their descriptions and themes.
-    Return ONLY the `filename` of the one best font. Do not provide any explanation or other text.
-    ---
-    AVAILABLE FONTS (JSON):
+    You are a PREMIUM typography director specializing in high-end brand identity and commercial design. Your expertise rivals top design agencies like Pentagram, Sagmeister & Walsh, and IDEO.
+
+    **MISSION**: Select the perfect font that elevates the banner to SELLABLE, PROFESSIONAL-GRADE quality.
+
+    **TYPOGRAPHY ANALYSIS FRAMEWORK:**
+    - **Brand Personality**: Does the font convey luxury, trust, innovation, playfulness, sophistication?
+    - **Emotional Impact**: What feelings does the typography evoke?
+    - **Market Positioning**: Premium, mainstream, or accessible luxury aesthetic?
+    - **Readability**: Clear hierarchy and excellent legibility across devices
+    - **Contemporary Relevance**: Current design trends and timeless appeal
+
+    **FONT SELECTION CRITERIA:**
+    1. **Brand Alignment**: Font personality matches the banner's message and audience
+    2. **Visual Hierarchy**: Supports clear information architecture
+    3. **Aesthetic Quality**: Professional finish and sophisticated character design
+    4. **Versatility**: Works well at multiple sizes and weights
+    5. **Market Appeal**: Enhances commercial value and perceived quality
+
+    **STYLE MATCHING GUIDELINES:**
+    - **Luxury/Premium**: Sophisticated serifs, refined sans-serifs, elegant scripts
+    - **Modern/Tech**: Clean geometrics, contemporary sans-serifs, futuristic fonts
+    - **Creative/Artistic**: Unique character, artistic flair, distinctive personality
+    - **Corporate/Professional**: Trustworthy, clean, excellent readability
+    - **Playful/Youth**: Dynamic, energetic, approachable character
+    - **Classic/Traditional**: Timeless elegance, established credibility
+
+    **AVAILABLE FONTS DATABASE:**
     {json.dumps(fonts_for_api, indent=2)}
-    ---
+
+    **SELECTION MANDATE:**
+    Analyze the banner description through the lens of premium design standards. Consider the font's ability to:
+    - Create emotional resonance with the target audience
+    - Support the overall brand strategy and message
+    - Maintain readability and professional appearance
+    - Enhance the commercial appeal of the final design
+
+    Return ONLY the `filename` of the single best font choice. No explanations.
     """
 
     # 4. Initialize the model and send the request

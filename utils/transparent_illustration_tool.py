@@ -15,44 +15,70 @@ client = OpenAI()
 @tool
 def generate_image_tool(prompt: str, size: str = "1024x1024") -> dict:
     """
-    Generates a complex, high-quality illustration image based on a given text prompt.
-    The image is uploaded to storage and a link is returned along with base64 data.
+    Generates PREMIUM, PROFESSIONAL-GRADE illustrations for high-end banner designs.
+    Creates sophisticated, commercially-viable graphics with transparent backgrounds.
 
-    This tool is designed to generate **non-photographic, artistic, or conceptual illustrations** — e.g. cartoon scenes, product illustrations, infographic components, icons, or abstract art. It does not generate realistic human photographs.
+    **QUALITY MISSION**: Produce illustrations that rival top design agencies and premium brand identity systems.
 
     ========================
-    **Supported Resolutions:**
+    **SUPPORTED RESOLUTIONS:**
     - '1024x1024'  (Square, default)
-    - '1792x1024'  (Wide landscape)
-    - '1024x1792'  (Vertical portrait)
-
-    *Other resolutions are not supported and may return errors.*
+    - '1024x1536'  (Wide landscape) 
+    - '1536x1024'  (Vertical portrait)
 
     ========================
-    **Prompt Guidelines:**
-    - Be descriptive and explicit. The model responds well to detailed scene descriptions.
-    - Use keywords like: "cartoon", "vector style", "digital illustration", "minimalist art", "flat design", etc.
-    - Avoid requesting realistic photographs or celebrity likenesses.
-    - Specify color schemes or mood where relevant (e.g. "warm colors", "blue background", "isometric view").
-    - Example:  
-        `"A digital illustration of a rocket ship launching, cartoon style, with colorful smoke trails, blue sky, and minimal flat design."`
+    **PREMIUM ILLUSTRATION GUIDELINES:**
+
+    **PROFESSIONAL TERMINOLOGY FOR BETTER QUALITY:**
+    - "Professional vector illustration with sophisticated gradients"
+    - "Contemporary graphic design with premium finish and clean lines"
+    - "High-end brand identity style with mathematical precision"
+    - "Sophisticated color palette with harmonious relationships"
+    - "Commercial-grade illustration with market appeal"
+
+    **STYLE SPECIFICATIONS:**
+    - **Modern**: Geometric precision, sophisticated gradients, clean minimalism
+    - **Luxury**: Elegant details, rich textures, premium color palettes
+    - **Corporate**: Professional aesthetics, trustworthy visual language
+    - **Creative**: Artistic flair with commercial viability
+    - **Tech**: Futuristic elements, digital sophistication
+
+    **QUALITY MARKERS TO INCLUDE:**
+    - "Professional finish", "sophisticated gradients", "premium quality"
+    - "Commercial-grade", "brand identity style", "market-ready"
+    - "Mathematical precision", "balanced composition", "visual hierarchy"
+    - "Contemporary design", "high-end aesthetic", "professional polish"
+
+    **AVOID AMATEUR TERMS:**
+    - Basic descriptions like "simple cartoon" or "basic design"
+    - Amateur styling requests
+    - Low-quality or unprofessional aesthetic descriptions
+
+    ========================
+    **ENHANCED PROMPT STRUCTURE:**
+    Use this format for maximum quality:
+    "Professional [style] illustration of [subject] with sophisticated gradients, premium finish, contemporary design aesthetic, balanced composition, and commercial-grade quality. Clean lines, harmonious color palette, transparent background."
 
     ========================
     **Arguments:**
-    - prompt (str): A detailed description of the image you want generated.
-    - size (str): Image resolution. Defaults to '1024x1024'. Must be one of the supported resolutions listed above.
+    - prompt (str): DETAILED professional illustration description
+    - size (str): Image resolution from supported options
 
-    ========================
     **Returns:**
-    - link (str): The storage URL of the uploaded image.
+    - link (str): Storage URL of the professional-grade illustration
     """
     object_id = str(uuid.uuid4())
+    # find nearest aspect ratio to the size and supported resolutions
+    width, height = map(int, size.split("x"))
+    supported_resolutions = [(1024, 1024), (1024, 1536), (1536, 1024)]
+    nearest_resolution = min(supported_resolutions, key=lambda x: abs(x[0] - width) + abs(x[1] - height))
+    inferred_size = f"{nearest_resolution[0]}x{nearest_resolution[1]}"
     
     try:
         result = client.images.generate(
             model="gpt-image-1",
             prompt=prompt,
-            size=size,
+            size=inferred_size,
             background="transparent"  # Note: transparency not fully supported yet, may require post-processing.
         )
         
@@ -61,7 +87,7 @@ def generate_image_tool(prompt: str, size: str = "1024x1024") -> dict:
 
         # Convert bytes to PIL Image
         image = Image.open(BytesIO(image_bytes)).convert("RGBA")
-
+        image = image.resize((width, height))
         # Upload PIL image to storage
         link = upload_image_to_s3(image, object_id + ".png")
 

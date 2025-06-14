@@ -4,12 +4,11 @@ import json
 import random
 from langchain_core.tools import tool
 import fal_client
-
-
+from utils.upload1 import upload_image_to_s3
+import uuid
 @tool
 def background_replacer(
     image_url: Annotated[str, "URL of the image to replace background for"],
-    mask_url: Annotated[str, "URL of the mask image"],
     prompt: Annotated[str, "Description of the new background to generate"],
     order_id: Annotated[Optional[str], "Order ID for tracking (optional)"] = None,
     user_type: Annotated[str, "User type"] = "FREE",
@@ -36,7 +35,7 @@ def background_replacer(
         URL of the image with replaced background
     """
     base_url = "https://static-aws-ml1.phot.ai/background-replacer-comfyui"
-    
+    mask_url = background_remover(image_url)
     if order_id is None:
         order_id = str(random.randint(1, 100000000))
     
@@ -136,22 +135,49 @@ def background_remover(
 
 @tool
 def text_to_image_generator(
-    prompt: Annotated[str, "Text description of the image to generate"],
+    prompt: Annotated[str, "PROFESSIONAL description for premium background generation"],
     width: Annotated[int, "Width of the generated image in pixels"] = 1024,
     height: Annotated[int, "Height of the generated image in pixels"] = 1024,
     out_path: Annotated[str, "Local file path to save the generated image"] = "generated_image.png"
 ) -> str:
     """
-    Generate an image from text prompt using Ideogram v3 model via FAL AI.
-    
+    Generate PREMIUM, PROFESSIONAL-GRADE background images for high-end banner designs.
+    Creates sophisticated, commercially-viable backgrounds with professional polish.
+
+    **QUALITY MISSION**: Produce backgrounds that rival top design agencies and premium brand campaigns.
+
+    **BACKGROUND GENERATION GUIDELINES:**
+
+    **PROFESSIONAL TERMINOLOGY FOR MAXIMUM QUALITY:**
+    - "Cinematic lighting with dramatic shadows and highlights"
+    - "Professional studio photography with sophisticated color grading"
+    - "High-end commercial aesthetic with atmospheric depth"
+    - "Premium brand campaign style with rich visual texture"
+    - "Sophisticated gradient systems with perfect tonal balance"
+
+    **QUALITY ENHANCEMENT KEYWORDS:**
+    - "Ultra-high-resolution", "professional studio setup", "cinematic composition"
+    - "Sophisticated color grading", "atmospheric depth", "premium finish"
+    - "Commercial-grade", "brand campaign quality", "market-ready aesthetic"
+    - "Professional lighting", "dramatic atmosphere", "rich visual texture"
+
+    **STYLE SPECIFICATIONS:**
+    - **Corporate**: Clean, professional, trustworthy atmospheric backgrounds
+    - **Luxury**: Rich textures, sophisticated gradients, premium aesthetics
+    - **Modern**: Contemporary design, geometric precision, sophisticated minimalism
+    - **Creative**: Artistic flair with commercial viability and visual impact
+
+    **ENHANCED PROMPT STRUCTURE:**
+    "Professional [style] background with cinematic lighting, sophisticated color grading, atmospheric depth, premium finish, and commercial-grade quality. Rich visual texture, dramatic highlights, [specific elements]. High-end brand campaign aesthetic."
+
     Args:
-        prompt: Text description of the image to generate
+        prompt: DETAILED professional background description with quality keywords
         width: Width of the generated image in pixels (default: 1024)
         height: Height of the generated image in pixels (default: 1024)
         out_path: Local file path to save the generated image (default: "generated_image.png")
     
     Returns:
-        URL of the generated image
+        URL of the professional-grade background image
     """
     try:
         
@@ -172,8 +198,12 @@ def text_to_image_generator(
         # Save the image to a file
         with open(out_path, 'wb') as f:
             f.write(requests.get(url).content)
-            
-        return url
+        
+        # Load the image as PIL Image before uploading
+        from PIL import Image
+        with Image.open(out_path) as pil_image:
+            img = upload_image_to_s3(pil_image, str(uuid.uuid4()) + '.png')
+        return img
         
     except ImportError:
         raise Exception("fal_client is not installed. Please install it with: pip install fal-client")
