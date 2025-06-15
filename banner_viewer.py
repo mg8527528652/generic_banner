@@ -205,7 +205,7 @@ if __name__ == "__main__":
     
     # --- IMPORTANT: UPDATE THESE PATHS ---
     input_directory = "generated_banners"
-    output_directory = "data/generated_banners_html"
+    output_directory = "generated_banners_html"
     
     # --- Run the script ---
     # This check prevents the script from running with the default placeholder paths.

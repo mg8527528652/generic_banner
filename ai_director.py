@@ -664,7 +664,7 @@ if __name__ == "__main__":
     }
     """
     simple_banner_queries = [
-    "Create a 'Grand Opening' banner for a new coffee shop called 'The Daily Grind.'",
+    "Create a 'Grand Opening' banner for a new coffee shop called 'The Daily Grind.'"
     "Design a motivational banner for Instagram with the quote 'Dream big, work hard, stay focused.'",
     "Generate a '40% Off Flash Sale' banner for a clothing store, valid this weekend only.",
     "Make a 'We're Hiring!' banner for a software developer position at a tech startup.",
@@ -742,7 +742,7 @@ if __name__ == "__main__":
     print(f"🔧 Using ThreadPoolExecutor with max_workers={min(len(simple_banner_queries), 3)}")
     
     results = []
-    with ThreadPoolExecutor(max_workers=min(len(simple_banner_queries), 3)) as executor:
+    with ThreadPoolExecutor(max_workers=min(len(simple_banner_queries), 9)) as executor:
         # Submit all banner generation tasks
         query_data = [(i, query) for i, query in enumerate(simple_banner_queries)]
         future_to_query = {
