@@ -1,11 +1,14 @@
 import os
 import json
+import time
 from typing import Dict, Any, List, Optional, TypedDict
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolNode
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 
 # Import all the specialized tools
 from utils.researcher_tool import banner_design_researcher
@@ -245,10 +248,133 @@ Create a concrete execution plan with specific assets, tools, and prompts (witho
         state["current_step"] = "error"
         return state
 
-def generation_phase(state: BannerState) -> BannerState:
-    """Phase 3: Generate assets according to execution plan"""
+def generate_single_asset(asset_plan: Dict[str, Any], state: BannerState, asset_index: int) -> Optional[Dict[str, Any]]:
+    """Generate a single asset - used for parallel processing"""
+    asset_type = asset_plan.get("type", "unknown")
+    tool_name = asset_plan.get("tool", "")
+    prompt = asset_plan.get("prompt", "")
+    description = asset_plan.get("description", "")
+    dimensions = asset_plan.get("dimensions", {"width": state["resolution"][0], "height": state["resolution"][1]})
+    
+    print(f"  {asset_index}. Generating {asset_type} using {tool_name}...")
+    print(f"     Prompt: {prompt}")
+    
     try:
-        print("🎨 Phase 3: Generating banner assets...")
+        # Route to the appropriate tool based on the plan
+        if tool_name == "select_best_font_url":
+            result = select_best_font_url.invoke({
+                "banner_prompt": state["design_brief"]
+            })
+            
+            if is_tool_success(result):
+                font_url = extract_tool_result(result)
+                print(f"     ✅ Font selected: {font_url}")
+                return {
+                    "type": "font",
+                    "url": font_url,
+                    "description": description,
+                    "is_font": True  # Special flag for font assets
+                }
+            else:
+                error_msg = extract_tool_result(result)
+                print(f"     ❌ Font selection failed: {error_msg}")
+                return None
+        
+        elif tool_name == "text_to_image_generator":
+            result = text_to_image_generator.invoke({
+                "prompt": prompt,
+                "width": dimensions["width"],
+                "height": dimensions["height"]
+            })
+            
+            if is_tool_success(result):
+                image_url = extract_tool_result(result)
+                print(f"     ✅ Background image generated")
+                return {
+                    "type": asset_type,
+                    "url": image_url,
+                    "description": description
+                }
+            else:
+                error_msg = extract_tool_result(result)
+                print(f"     ❌ Background generation failed: {error_msg}")
+                return None
+        
+        elif tool_name == "svg_generator":
+            result = svg_generator.invoke({
+                "description": prompt,
+                "width": dimensions.get("width", 200),
+                "height": dimensions.get("height", 200),
+                "style": "modern"
+            })
+            
+            if is_tool_success(result):
+                svg_content = extract_tool_result(result)
+                print(f"     ✅ SVG asset generated")
+                return {
+                    "type": asset_type,
+                    "content": svg_content,
+                    "description": description
+                }
+            else:
+                error_msg = extract_tool_result(result)
+                print(f"     ❌ SVG generation failed: {error_msg}")
+                return None
+        
+        elif tool_name == "generate_image_tool":
+            result = generate_image_tool.invoke({
+                "prompt": prompt,
+                "size": f"{dimensions['width']}x{dimensions['height']}"
+            })
+            
+            if is_tool_success(result):
+                image_url = extract_tool_result(result)
+                print(f"     ✅ Illustration generated")
+                return {
+                    "type": asset_type,
+                    "url": image_url,
+                    "description": description
+                }
+            else:
+                error_msg = extract_tool_result(result)
+                print(f"     ❌ Illustration generation failed: {error_msg}")
+                return None
+        
+        elif tool_name == "background_replacer":
+            if state.get("product_image_url"):
+                result = background_replacer.invoke({
+                    "image_url": state["product_image_url"],
+                    "prompt": prompt
+                })
+                
+                if is_tool_success(result):
+                    image_url = extract_tool_result(result)
+                    print(f"     ✅ Background replaced successfully")
+                    return {
+                        "type": asset_type,
+                        "url": image_url,
+                        "description": description
+                    }
+                else:
+                    error_msg = extract_tool_result(result)
+                    print(f"     ❌ Background replacement failed: {error_msg}")
+                    return None
+            else:
+                print(f"     ⚠️ Background replacement requires product image URL")
+                return None
+        
+        else:
+            print(f"     ❌ Unknown tool: {tool_name}")
+            return None
+            
+    except Exception as e:
+        print(f"     ❌ Error generating {asset_type}: {str(e)}")
+        return None
+
+def generation_phase(state: BannerState) -> BannerState:
+    """Phase 3: Generate assets according to execution plan - with parallel processing"""
+    try:
+        print("🎨 Phase 3: Generating banner assets in parallel...")
         
         execution_plan = state.get("execution_plan", {})
         assets_to_generate = execution_plan.get("assets_to_generate", [])
@@ -263,126 +389,34 @@ def generation_phase(state: BannerState) -> BannerState:
         
         generated_assets = []
         
-        # Process each asset in the execution plan
-        for i, asset_plan in enumerate(assets_to_generate, 1):
-            asset_type = asset_plan.get("type", "unknown")
-            tool_name = asset_plan.get("tool", "")
-            prompt = asset_plan.get("prompt", "")
-            description = asset_plan.get("description", "")
-            dimensions = asset_plan.get("dimensions", {"width": state["resolution"][0], "height": state["resolution"][1]})
+        # Process assets in parallel using ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=min(len(assets_to_generate), 4)) as executor:
+            # Submit all asset generation tasks
+            future_to_asset = {
+                executor.submit(generate_single_asset, asset_plan, state, i+1): (asset_plan, i+1)
+                for i, asset_plan in enumerate(assets_to_generate)
+            }
             
-            print(f"  {i}. Generating {asset_type} using {tool_name}...")
-            print(f"     Prompt: {prompt}")
-            
-            try:
-                # Route to the appropriate tool based on the plan
-                if tool_name == "select_best_font_url":
-                    result = select_best_font_url.invoke({
-                        "banner_prompt": state["design_brief"]
-                    })
-                    
-                    if is_tool_success(result):
-                        font_url = extract_tool_result(result)
-                        state["font_url"] = font_url
-                        generated_assets.append({
-                            "type": "font",
-                            "url": font_url,
-                            "description": description
-                        })
-                        print(f"     ✅ Font selected: {font_url}")
-                    else:
-                        error_msg = extract_tool_result(result)
-                        print(f"     ❌ Font selection failed: {error_msg}")
-                
-                elif tool_name == "text_to_image_generator":
-                    result = text_to_image_generator.invoke({
-                        "prompt": prompt,
-                        "width": dimensions["width"],
-                        "height": dimensions["height"]
-                    })
-                    
-                    if is_tool_success(result):
-                        image_url = extract_tool_result(result)
-                        generated_assets.append({
-                            "type": asset_type,
-                            "url": image_url,
-                            "description": description
-                        })
-                        print(f"     ✅ Background image generated")
-                    else:
-                        error_msg = extract_tool_result(result)
-                        print(f"     ❌ Background generation failed: {error_msg}")
-                
-                elif tool_name == "svg_generator":
-                    result = svg_generator.invoke({
-                        "description": prompt,
-                        "width": dimensions.get("width", 200),
-                        "height": dimensions.get("height", 200),
-                        "style": "modern"
-                    })
-                    
-                    if is_tool_success(result):
-                        svg_content = extract_tool_result(result)
-                        generated_assets.append({
-                            "type": asset_type,
-                            "content": svg_content,
-                            "description": description
-                        })
-                        print(f"     ✅ SVG asset generated")
-                    else:
-                        error_msg = extract_tool_result(result)
-                        print(f"     ❌ SVG generation failed: {error_msg}")
-                
-                elif tool_name == "generate_image_tool":
-                    result = generate_image_tool.invoke({
-                        "prompt": prompt,
-                        "size": f"{dimensions['width']}x{dimensions['height']}"
-                    })
-                    
-                    if is_tool_success(result):
-                        image_url = extract_tool_result(result)
-                        generated_assets.append({
-                            "type": asset_type,
-                            "url": image_url,
-                            "description": description
-                        })
-                        print(f"     ✅ Illustration generated")
-                    else:
-                        error_msg = extract_tool_result(result)
-                        print(f"     ❌ Illustration generation failed: {error_msg}")
-                
-                elif tool_name == "background_replacer":
-                    if state.get("product_image_url"):
-                        result = background_replacer.invoke({
-                            "image_url": state["product_image_url"],
-                            "prompt": prompt
-                        })
+            # Collect results as they complete
+            for future in as_completed(future_to_asset):
+                asset_plan, asset_index = future_to_asset[future]
+                try:
+                    result = future.result()
+                    if result:
+                        # Handle font assets specially
+                        if result.get("is_font"):
+                            state["font_url"] = result["url"]
+                            result.pop("is_font", None)  # Remove the flag before adding to assets
                         
-                        if is_tool_success(result):
-                            image_url = extract_tool_result(result)
-                            generated_assets.append({
-                                "type": asset_type,
-                                "url": image_url,
-                                "description": description
-                            })
-                            print(f"     ✅ Background replaced successfully")
-                        else:
-                            error_msg = extract_tool_result(result)
-                            print(f"     ❌ Background replacement failed: {error_msg}")
-                    else:
-                        print(f"     ⚠️ Background replacement requires product image URL")
-                
-                else:
-                    print(f"     ❌ Unknown tool: {tool_name}")
-                    
-            except Exception as e:
-                print(f"     ❌ Error generating {asset_type}: {str(e)}")
-                continue
+                        generated_assets.append(result)
+                except Exception as e:
+                    asset_type = asset_plan.get("type", "unknown")
+                    print(f"     ❌ Parallel execution error for {asset_type}: {str(e)}")
         
         state["generated_assets"] = generated_assets
         state["current_step"] = "composition"
         
-        print(f"✅ Asset generation complete - {len(generated_assets)} assets successfully created")
+        print(f"✅ Parallel asset generation complete - {len(generated_assets)} assets successfully created")
         return state
         
     except Exception as e:
@@ -641,23 +675,121 @@ if __name__ == "__main__":
     "Design a simple 'Save the Date' banner for Jessica and Tom's wedding on October 18th, 2025.",
     "Generate a vibrant 'Taco Tuesday' promotional banner for a Mexican restaurant."
     ]
-    for i, query in enumerate(simple_banner_queries):
-    # Test the AI Director
-        result = generate_banner(
-            user_prompt=query,
-            resolution=[1024, 1024],
-            product_image_url='',
-            logo=None
-        )
+    def generate_single_banner(query_data):
+        """Generate a single banner - used for parallel processing"""
+        i, query = query_data
+        st = time.time()
+        
+        print(f"🔧 [Thread-{threading.current_thread().name}] Generating banner {i+1}: {query[:50]}...")
+        
+        try:
+            result = generate_banner(
+                user_prompt=query,
+                resolution=[1024, 1024],
+                product_image_url='',
+                logo=None
+            )
+            
+            if result and not result.startswith("Error"):
+                print(f"\n🎉 [Thread-{threading.current_thread().name}] Banner {i+1} generated successfully!")
+                print(f"📄 Fabric JSON Length: {len(result)} characters")
+                
+                # Clean and parse result
+                result = result.strip().replace("```json", "").replace("```", "")
+                result_dict = json.loads(result)
+                
+                # Save the Fabric.js JSON directly
+                filename = f"generated_banner_{str(i)}.json"
+                save_path =  "generated_banners"    
+                os.makedirs(save_path, exist_ok=True)
+                with open(save_path + "/" + filename, "w") as f:
+                    f.write(result)
+                
+                print(f"💾 Fabric.js JSON saved to {filename}")
+                print(f"🔧 Time taken: {time.time() - st:.2f} seconds")
+                
+                return {
+                    "index": i,
+                    "query": query,
+                    "success": True,
+                    "filename": filename,
+                    "time_taken": time.time() - st,
+                    "json_length": len(result)
+                }
+            else:
+                print(f"\n❌ [Thread-{threading.current_thread().name}] Banner {i+1} generation failed: {result}")
+                return {
+                    "index": i,
+                    "query": query,
+                    "success": False,
+                    "error": result,
+                    "time_taken": time.time() - st
+                }
+                
+        except Exception as e:
+            print(f"\n❌ [Thread-{threading.current_thread().name}] Banner {i+1} generation error: {str(e)}")
+            return {
+                "index": i,
+                "query": query,
+                "success": False,
+                "error": str(e),
+                "time_taken": time.time() - st
+            }
     
-        if result and not result.startswith("Error"):
-            print("\n🎉 Banner generated successfully!")
-            print(f"📄 Fabric JSON Length: {len(result)} characters")
-            
-            # Save the Fabric.js JSON directly
-            with open(f"generated_banner_{str(i)}.json", "w") as f:
-                f.write(result)
-            
-            print(f"💾 Fabric.js JSON saved to generated_banner_{i}.json")
+    # Process banners in parallel
+    total_start_time = time.time()
+    print(f"🚀 Starting parallel processing of {len(simple_banner_queries)} banner queries...")
+    print(f"🔧 Using ThreadPoolExecutor with max_workers={min(len(simple_banner_queries), 3)}")
+    
+    results = []
+    with ThreadPoolExecutor(max_workers=min(len(simple_banner_queries), 3)) as executor:
+        # Submit all banner generation tasks
+        query_data = [(i, query) for i, query in enumerate(simple_banner_queries)]
+        future_to_query = {
+            executor.submit(generate_single_banner, data): data
+            for data in query_data
+        }
+        
+        # Collect results as they complete
+        for future in as_completed(future_to_query):
+            query_data = future_to_query[future]
+            try:
+                result = future.result()
+                results.append(result)
+                print(f"✅ Completed banner {result['index']+1}/{len(simple_banner_queries)}")
+            except Exception as e:
+                print(f"❌ Error processing banner {query_data[0]+1}: {str(e)}")
+                results.append({
+                    "index": query_data[0],
+                    "query": query_data[1],
+                    "success": False,
+                    "error": str(e),
+                    "time_taken": 0
+                })
+    
+    # Sort results by index to maintain order
+    results.sort(key=lambda x: x['index'])
+    
+    # Print summary
+    total_time = time.time() - total_start_time
+    successful_banners = sum(1 for r in results if r['success'])
+    failed_banners = len(results) - successful_banners
+    
+    print(f"\n🏁 PARALLEL PROCESSING COMPLETE!")
+    print(f"📊 Results Summary:")
+    print(f"   ✅ Successful banners: {successful_banners}/{len(simple_banner_queries)}")
+    print(f"   ❌ Failed banners: {failed_banners}/{len(simple_banner_queries)}")
+    print(f"   ⏱️  Total parallel time: {total_time:.2f} seconds")
+    print(f"   ⚡ Average time per banner: {total_time/len(simple_banner_queries):.2f} seconds")
+    
+    if successful_banners > 0:
+        avg_individual_time = sum(r['time_taken'] for r in results if r['success']) / successful_banners
+        speedup_factor = avg_individual_time * len(simple_banner_queries) / total_time
+        print(f"   🔥 Estimated speedup factor: {speedup_factor:.1f}x")
+    
+    print(f"\n📁 Generated files:")
+    for result in results:
+        if result['success']:
+            print(f"   ✅ {result['filename']} - {result['json_length']} chars - {result['time_taken']:.2f}s")
         else:
-            print(f"\n❌ Banner generation failed: {result}")
+            print(f"   ❌ Banner {result['index']+1} failed: {result.get('error', 'Unknown error')}")

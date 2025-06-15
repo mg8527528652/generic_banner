@@ -86,8 +86,6 @@ def analyze_images_from_cache(image_urls: list[str], user_query: str, resolution
     analysis_llm = ChatOpenAI(
         model="gpt-4.1-2025-04-14",
         openai_api_key=os.getenv("OPENAI_API_KEY"),
-        reasoning_effort="high",
-        temperature=0.3  # Lower temperature for more consistent, professional briefs
     )
 
     # Build the resolution context
